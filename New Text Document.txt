@@ -1,0 +1,117 @@
+#!/bin/bash
+
+while true
+do
+    echo "===== ADDRESS BOOK MENU ====="
+    echo "1. Create Address Book"
+    echo "2. View Address Book"
+    echo "3. Insert Record"
+    echo "4. Delete Record"
+    echo "5. Modify Record"
+    echo "6. Exit"
+    echo "Enter your choice:"
+    read choice
+
+    case $choice in
+
+    1)
+        echo "Enter file name:"
+        read file
+
+        if [ -f "$file" ]
+        then
+            echo "Address book already exists!"
+        else
+            touch "$file"
+            echo "Address book created successfully!"
+        fi
+        ;;
+
+    2)
+        echo "Enter file name to view:"
+        read file
+
+        if [ -f "$file" ]
+        then
+            echo "----- Address Book -----"
+            cat "$file"
+        else
+            echo "File does not exist!"
+        fi
+        ;;
+
+    3)
+        echo "Enter file name:"
+        read file
+
+        if [ -f "$file" ]
+        then
+            echo "Enter Name:"
+            read name
+            echo "Enter Phone:"
+            read phone
+            echo "Enter Email:"
+            read email
+
+            echo "$name | $phone | $email" >> "$file"
+            echo "Record inserted successfully!"
+        else
+            echo "Address book does not exist!"
+        fi
+        ;;
+
+    4)
+        echo "Enter file name:"
+        read file
+
+        if [ -f "$file" ]
+        then
+            echo "Enter name to delete:"
+            read del
+
+            grep -iv "$del" "$file" > temp.txt
+            mv temp.txt "$file"
+            echo "Record deleted successfully!"
+        else
+            echo "File does not exist!"
+        fi
+        ;;
+
+    5)
+        echo "Enter file name:"
+        read file
+
+        if [ -f "$file" ]
+        then
+            echo "Enter name to modify:"
+            read mod
+
+            grep -iv "$mod" "$file" > temp.txt
+            mv temp.txt "$file"
+
+            echo "Enter new details:"
+            echo "Name:"
+            read name
+            echo "Phone:"
+            read phone
+            echo "Email:"
+            read email
+
+            echo "$name | $phone | $email" >> "$file"
+            echo "Record modified successfully!"
+        else
+            echo "File does not exist!"
+        fi
+        ;;
+
+    6)
+        echo "Exiting..."
+        exit
+        ;;
+
+    *)
+        echo "Invalid choice!"
+        ;;
+    esac
+
+done
