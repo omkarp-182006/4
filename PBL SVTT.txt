@@ -1,0 +1,197 @@
+Selenium Automation Testing Lab Manual (Python)
+This document contains practical experiments demonstrating Selenium WebDriver automation using
+Python.
+
+Experiment 1: Selenium Environment Setup
+Aim: To install Selenium, configure WebDriver, and verify that the browser launches successfully.
+Procedure:
+1. Install Python on the system.
+2. Install Selenium using pip.
+3. Download ChromeDriver compatible with the browser version.
+4. Place ChromeDriver in the project folder.
+5. Import Selenium libraries and create a WebDriver instance.
+6. Open a webpage to verify the browser launch.
+Python Code:
+from selenium import webdriver
+driver = webdriver.Chrome()
+driver.get("https://www.google.com")
+print(driver.title)
+driver.quit()
+Result: The browser launches successfully and opens the Google homepage.
+
+Experiment 2: Browser Navigation
+Aim: To automate browser navigation such as opening pages, navigating back and forward, and
+refreshing.
+Procedure:
+1. Import Selenium WebDriver.
+2. Launch the browser.
+3. Open a webpage.
+4. Navigate to another webpage.
+5. Use back(), forward(), and refresh() methods.
+Python Code:
+from selenium import webdriver
+import time
+driver = webdriver.Chrome()
+driver.get("https://www.google.com")
+time.sleep(2)
+driver.get("https://www.wikipedia.org")
+time.sleep(2)
+driver.back()
+time.sleep(2)
+driver.forward()
+time.sleep(2)
+driver.refresh()
+driver.quit()
+Result: Browser navigation actions such as back, forward, and refresh are executed successfully.
+
+Experiment 3: Locators in Selenium
+Aim: To identify web elements using ID, Name, and XPath locators.
+Procedure:
+1. Open a login webpage.
+2. Locate elements using different locator strategies.
+3. Enter data into input fields.
+4. Click the login button.
+Python Code:
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+driver = webdriver.Chrome()
+driver.get("https://www.facebook.com")
+username = driver.find_element(By.ID,"email")
+password = driver.find_element(By.NAME,"pass")
+login_btn = driver.find_element(By.XPATH,"//button[@name='login']")
+username.send_keys("testuser")
+password.send_keys("password123")
+login_btn.click()
+driver.quit()
+Result: Web elements were successfully located using multiple locator strategies.
+
+Experiment 4: Form Automation
+Aim: To automate filling and submitting a web form using Selenium.
+Procedure:
+1. Open a webpage containing a form.
+2. Locate form fields using IDs.
+3. Enter test data into each field.
+4. Submit the form.
+Python Code:
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+driver = webdriver.Chrome()
+driver.get("https://demoqa.com/text-box")
+driver.find_element(By.ID,"userName").send_keys("John Doe")
+driver.find_element(By.ID,"userEmail").send_keys("john@test.com")
+driver.find_element(By.ID,"currentAddress").send_keys("New York")
+driver.find_element(By.ID,"permanentAddress").send_keys("USA")
+driver.find_element(By.ID,"submit").click()
+driver.quit()
+Result: The form fields are automatically filled and submitted successfully.
+
+Experiment 5: Dropdown and Checkbox Handling
+Aim: To handle dropdown menus and checkboxes using Selenium.
+Procedure:
+1. Open a webpage with dropdown options.
+2. Use the Select class to interact with dropdown menus.
+3. Locate and click checkbox elements.
+Python Code:
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import Select
+driver = webdriver.Chrome()
+driver.get("https://demoqa.com/select-menu")
+dropdown = Select(driver.find_element(By.ID,"oldSelectMenu"))
+dropdown.select_by_visible_text("Purple")
+driver.get("https://demoqa.com/checkbox")
+checkbox = driver.find_element(By.CLASS_NAME,"rct-checkbox")
+checkbox.click()
+driver.quit()
+Result: Dropdown options and checkbox elements were handled successfully.
+
+Experiment 6: Alert Handling
+Aim: To handle JavaScript alerts using Selenium.
+Procedure:
+1. Open a webpage containing alert buttons.
+2. Trigger the alert.
+3. Switch to the alert box.
+4. Accept the alert.
+Python Code:
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+import time
+driver = webdriver.Chrome()
+driver.get("https://demoqa.com/alerts")
+driver.find_element(By.ID,"alertButton").click()
+time.sleep(2)
+alert = driver.switch_to.alert
+print(alert.text)
+alert.accept()
+driver.quit()
+Result: The alert pop-up was detected and handled successfully.
+
+Experiment 7: Screenshot Capture
+Aim: To capture screenshots of web pages during testing.
+Procedure:
+1. Open a webpage using Selenium.
+2. Capture a screenshot of the page.
+3. Save the screenshot to the system.
+Python Code:
+from selenium import webdriver
+driver = webdriver.Chrome()
+driver.get("https://www.google.com")
+driver.save_screenshot("google_page.png")
+driver.quit()
+Result: Screenshot of the webpage was captured and saved successfully.
+
+Experiment 8: Mouse Actions
+Aim: To perform mouse hover actions using ActionChains.
+Procedure:
+1. Import ActionChains class.
+2. Open a webpage.
+3. Locate the element for mouse hover.
+4. Perform the hover action.
+Python Code:
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.common.action_chains import ActionChains
+driver = webdriver.Chrome()
+driver.get("https://www.amazon.com")
+menu = driver.find_element(By.ID,"nav-link-accountList")
+actions = ActionChains(driver)
+actions.move_to_element(menu).perform()
+driver.quit()
+Result: Mouse hover action was executed successfully.
+
+Experiment 9: Web Table Handling
+Aim: To extract and display data from a web table.
+Procedure:
+1. Open a webpage containing a table.
+2. Locate rows using XPath.
+3. Iterate through rows and print the data.
+Python Code:
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+driver = webdriver.Chrome()
+driver.get("https://www.w3schools.com/html/html_tables.asp")
+rows = driver.find_elements(By.XPATH,"//table[@id='customers']/tbody/tr")
+for row in rows:
+ print(row.text)
+driver.quit()
+Result: Table data was extracted successfully.
+
+Experiment 10: Wait Mechanisms
+Aim: To use explicit waits to handle dynamic web elements.
+Procedure:
+1. Import WebDriverWait and expected_conditions.
+2. Open a webpage.
+3. Wait until the element becomes visible.
+4. Interact with the element.
+Python Code:
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+driver = webdriver.Chrome()
+driver.get("https://www.google.com")
+wait = WebDriverWait(driver,10)
+search = wait.until(EC.visibility_of_element_located((By.NAME,"q")))
+search.send_keys("Selenium Python")
+driver.quit()
+Result: Dynamic elements were handled successfully using explicit wait.
