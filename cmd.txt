@@ -1,5 +1,0 @@
-mkdir bash-assignment
-cd bash-assignment
-touch addressbook.sh
-gedit addressbook.sh    if the gedit not install it
-text file will open
